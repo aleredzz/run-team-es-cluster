@@ -45,7 +45,7 @@ ip-10-0-3-51.eu-west-1.compute.internal    Ready    <none>   5d10h   v1.23.17-ek
 
 ### ES Cluster Installation
 
-For this solution, We opt for the Operator pattern offered by Elastic to install Elastic Search clusters in Kubernetes. It is also the recommended way to by Elastic to lift and run the platform, known as `ECK` (Elastic Cloud on Kubernetes).
+For this solution, We opt for the Operator pattern offered by Elastic to install Elastic Search clusters in Kubernetes. It is also the recommended way by Elastic to lift and run the platform, known as `ECK` (Elastic Cloud on Kubernetes).
 
 ### ECK Version
 
@@ -130,7 +130,7 @@ Since the operator manages the ECK deployments, now we need to install an instan
 
 #### Deploy ElasticSearch
 
-For the ECK deployment configuration (the instance of the cluster), let's look at the `es.yaml` file bellow. It can be found in the root of this project too.
+For the ECK deployment configuration (the instance of the cluster), let's look at the `1-es.yaml` file bellow. It can be found in the root of this project too.
 
 ```yaml
 apiVersion: elasticsearch.k8s.elastic.co/v1
@@ -144,7 +144,7 @@ spec:
   - name: all-roles-node
     # we do not specify roles, so all the nodes have the same set of roles
     count: 3
-    # For High Avilibility we set count to 3 
+    # For High Availability we set count to 3 
     config:
       index.store.type: niofs
       # see vm-setting/README.md for the reasoning of this config
@@ -209,7 +209,7 @@ Now that the deployment is `Green`, we can install Kibana.
 
 To ramp up the value off ES, We have included Kibana in this deployment. But please note that this is an optional step.
 
-For the Kibana configuration, we will use the `kibana.yaml` file bellow. It can be found in the root of this project too.
+For the Kibana configuration, we will use the `2-kibana.yaml` file bellow. It can be found in the root of this project too.
 
 ```yaml
 apiVersion: kibana.k8s.elastic.co/v1
@@ -311,7 +311,7 @@ http://a280857e01ba84e6ab8ea20675c5c2b1-2063930881.eu-west-1.elb.amazonaws.com:5
 
 ## Users
 
-Now that the services are accessible, let's go to the dashboard and configure the users who we can use ES and Kibana:
+Now that the services are accessible, let's go to the dashboard and configure the users so we can use ES and Kibana:
 
 **Steps**:
 
