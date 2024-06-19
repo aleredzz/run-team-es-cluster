@@ -1,0 +1,17 @@
+--- 
+# internal facing loadbalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: es-service-loadbalancer-int
+  namespace: eks
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    elasticsearch.k8s.elastic.co/cluster-name: run-team
+  ports:
+    - protocol: TCP
+      port: 9200
+      targetPort: 9200

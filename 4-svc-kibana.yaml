@@ -1,0 +1,32 @@
+---
+# external facing loadbalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-service-loadbalancer-ext
+  namespace: eks
+spec:
+  type: LoadBalancer
+  selector:
+    kibana.k8s.elastic.co/name: run-team
+  ports:
+    - protocol: TCP
+      port: 5601
+      targetPort: 5601
+--- 
+# internal facing loadbalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-service-loadbalancer-int
+  namespace: eks
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    kibana.k8s.elastic.co/name: run-team
+  ports:
+    - protocol: TCP
+      port: 5601
+      targetPort: 5601
